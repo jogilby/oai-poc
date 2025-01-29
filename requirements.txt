@@ -8,3 +8,4 @@ openai
 numpy
 requests
 gunicorn    # For production environment, if desired
+pdf2image
