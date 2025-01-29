@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PDF Q&A Demo</title>
+</head>
+<body>
+    <h1>PDF Q&A Application</h1>
+
+    <!-- PDF Upload Form -->
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <label for="file">Upload one or more PDFs:</label>
+        <input type="file" name="file" id="file" multiple>
+        <button type="submit">Upload</button>
+    </form>
+
+    <hr>
+
+    <!-- Question Form -->
+    <div>
+        <label for="question">Ask a question about the uploaded PDFs:</label><br>
+        <input type="text" id="question" name="question" style="width: 400px;">
+        <button onclick="askQuestion()">Ask</button>
+    </div>
+
+    <p id="answer"></p>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById('question').value;
+            const response = await fetch('/ask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ question: question })
+            });
+
+            if (!response.ok) {
+                document.getElementById('answer').innerText = 'Error: Could not get answer.';
+                return;
+            }
+
+            const data = await response.json();
+            document.getElementById('answer').innerText = data.answer;
+        }
+    </script>
+
+</body>
+</html>

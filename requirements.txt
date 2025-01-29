@@ -1,0 +1,10 @@
+flask
+PyPDF2
+pdfplumber
+pytesseract
+pillow
+faiss-cpu   # or faiss-gpu, if desired
+openai
+numpy
+requests
+gunicorn    # For production environment, if desired
